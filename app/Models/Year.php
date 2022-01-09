@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Teacher extends Model
+class Year extends Model
 {
-    protected $table = "teacher_record";
+    protected $table = "year_record";
 
-    protected  $primaryKey = 'teacher_id';
+    protected  $primaryKey = 'year_id';
 
     public $timestamps = true;
+
 }

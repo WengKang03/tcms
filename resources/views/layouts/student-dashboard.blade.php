@@ -106,27 +106,35 @@
                         <li class="nav-small-cap"><span class="hide-menu">Manage Information</span></li>
 
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link"
-                                href="student-modify-personal-information/{{ Auth::id() }}" aria-expanded="false"><i data-feather="list"
+                                href="/student-view-personal-information/{{ Auth::id() }}" aria-expanded="false"><i data-feather="list"
                                     class="feather-icon"></i><span class="hide-menu">View</span></a></li>
+                        
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="/student-modify-personal-information/{{ Auth::id() }}"
+                                aria-expanded="false"><i data-feather="list" class="feather-icon"></i><span
+                                     class="hide-menu">Manage</span></a></li>
 
                         <li class="list-divider"></li>
 
 
 
-                        <li class="nav-small-cap"><span class="hide-menu">Manage Timetable</span></li>
+                        <li class="nav-small-cap"><span class="hide-menu">View Timetable</span></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="#"
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{{url('student.student-view-timetable')}}"
                                 aria-expanded="false"><i data-feather="list" class="feather-icon"></i><span
-                                    class="hide-menu">Manage</span></a></li>
-
+                                    class="hide-menu">View</span></a></li>
 
                         <li class="list-divider"></li>
 
-                        <li class="nav-small-cap"><span class="hide-menu">Manage Subject</span></li>
+                        <li class="nav-small-cap"><span class="hide-menu">Enrol Subject</span></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="#"
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{{url('student.student-create-subject-enrol')}}"
                                 aria-expanded="false"><i data-feather="list" class="feather-icon"></i><span
-                                    class="hide-menu">Enrol Subject</span></a></li>
+                                    class="hide-menu">Create</span></a></li>
+
+
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{{url('student.student-view-subject-enrol-list')}}"
+                                aria-expanded="false"><i data-feather="list" class="feather-icon"></i><span
+                                    class="hide-menu">View</span></a></li>
                         <li class="list-divider"></li>
 
 

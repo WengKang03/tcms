@@ -1,7 +1,7 @@
-@extends('layouts.admin-dashboard')
+@extends('layouts.teacher-dashboard')
 
 @section('title')
-Modify Teacher Information
+View Personal Information
 @endsection
 
 @section('content')
@@ -9,13 +9,13 @@ Modify Teacher Information
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-7 align-self-center">
-                <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Modify Teacher Information</h4>
+                <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">View Personal Information</h4>
                 <div class="d-flex align-items-center">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb m-0 p-0">
-                            <li class="breadcrumb-item"><a href="admin.admin-dashboard"
+                            <li class="breadcrumb-item"><a href="/teacher.teacher-dashboard"
                                     class="text-muted">Dashboard</a></li>
-                            <li class="breadcrumb-item text-muted active" aria-current="page">Teacher Information</li>
+                            <li class="breadcrumb-item text-muted active" aria-current="page">Personal Information</li>
                         </ol>
                     </nav>
                 </div>
@@ -41,19 +41,44 @@ Modify Teacher Information
                         @endif
 
 
-
-                        <h4 class="card-title">Modify Teacher Information</h4>
-                        <form action="/admin-modify-teacher-information-update/{{ $teachers->teacher_id }}" method="POST">
+                        <form action="teacher-view-personal-information-update/{{ Auth::id() }}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
-                            <div class="form-body"><br>
+                            <div class="form-body">
+
+                                @if($teachers->teacher_photo == true)         
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <h4 class="card-title">View Personal Information</h4>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <img style="width: 200px; height: 200px;"
+                                            src="/storage/teacher_images/{{ $teachers->teacher_photo }}" readonly>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <br>
+                                    </div>
+                                </div>                                
+                                @else
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <h4 class="card-title">View Personal Information</h4>
+                                    </div>
+                                    <div class="col-md-2">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <br>
+                                    </div>
+                                </div><br>
+                                @endif
+
 
                                 <div class="row">
                                     <div class="col-md-1">
                                         <div class="form-group">
                                             <label>ID:</label>
                                             <input type="text" class="form-control" placeholder="Teacher ID"
-                                                value="{{ $teachers->teacher_id }}" readonly>
+                                                value="{{ Auth::id() }}" readonly>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -61,7 +86,7 @@ Modify Teacher Information
                                             <label>Teacher name:</label>
                                             <input type="text" name="username"
                                                 class="form-control @error('username') is-invalid @enderror"
-                                                placeholder="TeacherName" value="{{ $teachers->teacher_name }}">
+                                                placeholder="Teacher Name" value="{{ $teachers->teacher_name }}" readonly>
 
                                             @error('username')
                                                 <div class="invalid-feedback">
@@ -75,7 +100,7 @@ Modify Teacher Information
                                             <label>Teacher Phone:</label>
                                             <input type="text" name="phone"
                                                 class="form-control @error('phone') is-invalid @enderror"
-                                                placeholder="Teacher Phone" value="{{ $teachers->teacher_phone }}">
+                                                placeholder="Teacher Phone" value="{{ $teachers->teacher_phone }}" readonly>
 
                                             @error('phone')
                                                 <div class="invalid-feedback">
@@ -87,13 +112,13 @@ Modify Teacher Information
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Teacher Email address:</label>
                                             <input type="text" name="email"
                                                 class="form-control @error('email') is-invalid @enderror"
                                                 placeholder="Teacher Email Address"
-                                                value="{{ $teachers->teacher_email }}">
+                                                value="{{ $teachers->teacher_email }}" readonly>
 
                                             @error('email')
                                                 <div class="invalid-feedback">
@@ -103,34 +128,14 @@ Modify Teacher Information
 
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label>Password:</label>
-                                            <input type="password" name="password"
-                                                class="form-control @error('password') is-invalid @enderror">
 
-                                            @error('password')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Gender:</label>
-                                            <select name="gender"
-                                                class="form-control  @error('gender') is-invalid @enderror">
-                                                <option value="male"
-                                                    {{ $teachers->teacher_gender == "male" ? 'selected' : '' }}>
-                                                    Male</option>
-                                                <option value="female"
-                                                    {{ $teachers->teacher_gender == "female" ? 'selected' : '' }}>
-                                                    Female</option>
-                                            </select>
+                                            <input type="text" name="gender"
+                                                class="form-control @error('gender') is-invalid @enderror"
+                                                placeholder="Teacher Gender"
+                                                value="{{ $teachers->teacher_gender }}" readonly>
 
                                             @error('gender')
                                                 <div class="invalid-feedback">
@@ -141,36 +146,25 @@ Modify Teacher Information
                                         </div>
                                     </div>
 
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Subject Type:</label>
-                                            <select name="subject"
-                                                class="form-control @error('subject') is-invalid @enderror">
-                                                <option value="BM" 
-                                                    {{ $teachers->teacher_subject == "BM" ? 'selected' : '' }}>
-                                                    BM</option>
-                                                <option value="BC"
-                                                    {{ $teachers->teacher_subject == "BC" ? 'selected' : '' }}>
-                                                    BC</option>
-                                                <option value="BI"
-                                                    {{ $teachers->teacher_subject == "BI" ? 'selected' : '' }}>
-                                                    BI</option>
-                                                <option value="Math"
-                                                    {{ $teachers->teacher_subject == "Math" ? 'selected' : '' }}>
-                                                    Math</option>
-                                                    <option value="SC"
-                                                    {{ $teachers->teacher_subject == "SC" ? 'selected' : '' }}>
-                                                    SC</option>
-                                            </select>
+                                            <input type="text" name="subject"
+                                                class="form-control @error('subject') is-invalid @enderror"
+                                                placeholder="Subject Type"
+                                                value="{{ $teachers->teacher_subject }}" readonly>
 
                                             @error('subject')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
                                                 </div>
                                             @enderror
+
                                         </div>
                                     </div>
                                 </div>
+
+
 
                                 <div class="row">
                                     <div class="col-md-6">
@@ -202,13 +196,6 @@ Modify Teacher Information
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="form-actions">
-                                    <div class="text-right">
-                                        <button type="submit" class="btn btn-info">Submit</button>
-                                        <a href="/admin.admin-manage-teacher" class="btn btn-danger">Back</a>
-                                    </div>
-                                </div>
                         </form>
                     </div>
                 </div>
@@ -218,7 +205,6 @@ Modify Teacher Information
 
 
 </div>
-
 @endsection
 
 @section('scripts')

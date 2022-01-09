@@ -81,6 +81,9 @@ Manage Student
                                     <th>Name</th>
                                     <th>Phone</th>
                                     <th>Email</th>
+                                    <th>Gender</th>
+                                    <th>Grade</th>
+                                    <th>Year</th>
                                     <th>Created At</th>
                                     <th>Updated At</th>
                                     <th>Operation</th>
@@ -93,6 +96,9 @@ Manage Student
                                             <td>{{ $student->student_name }}</td>
                                             <td>{{ $student->student_phone }}</td>
                                             <td>{{ $student->student_email }}</td>
+                                            <td>{{ $student->student_gender }}</td>
+                                            <td>{{ $student->student_grade }}</td>
+                                            <td>{{ $student->student_year }}</td>
                                             <td>{{ $student->created_at }}</td>
                                             <td>{{ $student->updated_at }}</td>
                                             <td>

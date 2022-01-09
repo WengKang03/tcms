@@ -35,3 +35,4 @@ class CreateTeacherRecordTable extends Migration
         Schema::dropIfExists('teacher_record');
     }
 }
+

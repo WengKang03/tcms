@@ -46,7 +46,7 @@ Manage Teacher
 
                         <div class="modal-body">
                             <input type="hidden" id="delete_user_record" />
-                            <h4 style="text-align: center;">Are you sure to delete this teacher?</h4>
+                            <h4 style="text-align: center;">Are you sure to delete this user?</h4>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
@@ -81,6 +81,8 @@ Manage Teacher
                                     <th>Name</th>
                                     <th>Phone</th>
                                     <th>Email</th>
+                                    <th>Gender</th>
+                                    <th>Subject</th>
                                     <th>Created At</th>
                                     <th>Updated At</th>
                                     <th>Operation</th>
@@ -93,12 +95,14 @@ Manage Teacher
                                             <td>{{ $teacher->teacher_name }}</td>
                                             <td>{{ $teacher->teacher_phone }}</td>
                                             <td>{{ $teacher->teacher_email }}</td>
+                                            <td>{{ $teacher->teacher_gender }}</td>
+                                            <td>{{ $teacher->teacher_subject }}</td>
                                             <td>{{ $teacher->created_at }}</td>
                                             <td>{{ $teacher->updated_at }}</td>
                                             <td>
-                                                <a href="admin-modify-teacher-information/{{ $teacher->teacher_id }}"
+                                                <a href="/admin-modify-teacher-information/{{ $teacher->teacher_id }}"
                                                     class="btn waves-effect waves-light btn-light btn-circle"><i class="fas fa-edit"></i></a>
-                                                <a href="javascript:void(0)" class="btn btn-danger delete teacher btn-circle"><i class="fas fa-trash-alt"></i></a>
+                                                    <a href="javascript:void(0)" class="btn btn-danger deleteusertbtn btn-circle"><i class="fas fa-trash-alt"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach

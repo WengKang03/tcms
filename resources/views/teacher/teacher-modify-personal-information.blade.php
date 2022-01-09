@@ -163,22 +163,6 @@ Modify Personal Information
 
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label>Photo:</label>
-                                            <input type="file" name="photo"
-                                                class="form-control-file @error('photo') is-invalid @enderror"
-                                                placeholder="Teacher Photo" value="{{ $teachers->teacher_photo }}">
-
-                                            @error('photo')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-
-                                        </div>
-                                    </div>
-                                </div>
 
                                 <div class="col-md-2">
                                         <div class="form-group">
@@ -195,10 +179,10 @@ Modify Personal Information
                                                     {{ $teachers->teacher_subject == "chinese" ? 'selected' : '' }}>
                                                     Chinese</option>
                                                 <option value="mathematic"
-                                                    {{ $teachers->teacher_gender == "mathematic" ? 'selected' : '' }}>
+                                                    {{ $teachers->teacher_subject == "mathematic" ? 'selected' : '' }}>
                                                     Mathematic</option>
                                                 <option value="science"
-                                                    {{ $teachers->teacher_gender == "science" ? 'selected' : '' }}>
+                                                    {{ $teachers->teacher_subject == "science" ? 'selected' : '' }}>
                                                     Science</option>
                                             </select>
 
@@ -210,6 +194,23 @@ Modify Personal Information
 
                                         </div>
                                     </div>
+                            </div>
+
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label>Photo:</label>
+                                            <input type="file" name="photo"
+                                                class="form-control-file @error('photo') is-invalid @enderror"
+                                                placeholder="Teacher Photo" value="{{ $teachers->teacher_photo }}">
+
+                                            @error('photo')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                
 
 
 

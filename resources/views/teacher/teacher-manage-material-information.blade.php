@@ -4,10 +4,10 @@
 <!-- Custom CSS -->
 <link href="{{ asset('adminmart assets/css/style.min.css') }}" rel="stylesheet">
 
-@extends('layouts.admin-dashboard')
+@extends('layouts.teacher-dashboard')
 
 @section('title')
-Manage User
+Manage material
 @endsection
 
 @section('content')
@@ -15,13 +15,13 @@ Manage User
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-7 align-self-center">
-                <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Manage User</h4>
+                <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Manage Study Material</h4>
                 <div class="d-flex align-items-center">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb m-0 p-0">
-                            <li class="breadcrumb-item"><a href="admin.admin-dashboard" class="text-muted">Home</a>
+                            <li class="breadcrumb-item"><a href="teacher.teacher-dashboard" class="text-muted">Home</a>
                             </li>
-                            <li class="breadcrumb-item text-muted active" aria-current="page">User</li>
+                            <li class="breadcrumb-item text-muted active" aria-current="page">Study Material</li>
                         </ol>
                     </nav>
                 </div>
@@ -45,7 +45,7 @@ Manage User
                         {{ method_field('DELETE') }}
 
                         <div class="modal-body">
-                            <input type="hidden" id="delete_user_record" />
+                            <input type="hidden" id="delete_material_record" />
                             <h4 style="text-align: center;">Are you sure to delete this user?</h4>
                         </div>
                         <div class="modal-footer">
@@ -61,7 +61,7 @@ Manage User
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Users List</h4>
+                        <h4 class="card-title">Material List</h4>
                         <div class="table-responsive">
 
                             <table id="dataTable" class="table table-striped table-bordered no-wrap">
@@ -76,44 +76,56 @@ Manage User
                                     </div>
                                 @endif
 
-                                <thead style="text-align:center;overflow-x:auto;">
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Phone</th>
-                                    <th>Email</th>
-                                    <th>Created At</th>
-                                    <th>Updated At</th>
-                                    <th>Operation</th>
-                                </thead>
+                            <thead style="text-align:center;overflow-x:auto;">
+                                <th>ID</th>
+                                <th>File</th>
+                                <th>Grade</th>
+                                <th>Year</th>
+                                <th>Subject</th>
+                                <th>Description</th>
+                                <th>Created By</th>
+                                <th>Created At</th>
+                                <th>Updated At</th>
+                            </thead>
 
-                                <tbody style="text-align:center;overflow-x:auto;">
-                                    @foreach($users as $user)
-                                        <tr>
-                                            <td>{{ $user->id }}</td>
-                                            <td>{{ $user->name }}</td>
-                                            <td>{{ $user->phone }}</td>
-                                            <td>{{ $user->email }}</td>
-                                            <td>{{ $user->created_at }}</td>
-                                            <td>{{ $user->updated_at }}</td>
-                                            <td>
-                                                <a href="admin-modify-user-profile/{{ $user->id }}" class="btn waves-effect waves-light btn-light btn-circle"><i class="fas fa-edit"></i></a>
-                                                <a href="javascript:void(0)" class="btn btn-danger deleteusertbtn btn-circle"><i class="fas fa-trash-alt"></i></a>   
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                            <tbody style="text-align:center;overflow-x:auto;">
+                                @foreach($materials as $material)
+                                    <tr>
+                                        <td>{{ $material->material_id }}</td>
+                                        <td><img src="{{ asset('public/material_file/'. $material->material_file ) }}" width="50px"></td>
+                                        <td>{{ $material->material_grade }}</td>
+                                        <td>{{ $material->material_year }}</td>
+                                        <td>{{ $material->material_subject }}</td>
+                                        <td>{{ $material->material_desc }}</td>
+                                        <td>{{ $material->created_by }}</td>
+                                        <td>{{ $material->created_at }}</td>
+                                        <td>{{ $material->updated_at }}</td>
+                                        <td>
+                                            <a href="teacher-modify-material-information/{{ $material->material_id }}"
+                                                class="btn waves-effect waves-light btn-light btn-circle"><i class="fas fa-edit"></i></a>
+                                            <a href="javascript:void(0)" class="btn btn-danger delete teacher btn-circle"><i class="fas fa-trash-alt"></i></a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
-
-
     </div>
+
+
+</div>
 </div>
 @endsection
 
 @section('scripts')
 
 @endsection
+
+
+   
+
+        
+

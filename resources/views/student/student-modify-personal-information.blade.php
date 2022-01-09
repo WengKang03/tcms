@@ -81,7 +81,8 @@ Modify Personal Information
                                                 value="{{ Auth::id() }}" readonly>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Student name:</label>
                                             <input type="text" name="username"
@@ -95,7 +96,8 @@ Modify Personal Information
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-md-5">
+
+                                    <div class="col-md-3">
                                         <div class="form-group">
                                             <label>Student Phone:</label>
                                             <input type="text" name="phone"
@@ -109,9 +111,7 @@ Modify Personal Information
                                             @enderror
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Student Email address:</label>
@@ -128,6 +128,9 @@ Modify Personal Information
 
                                         </div>
                                     </div>
+                                </div>
+
+                                <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label>Password:</label>
@@ -141,7 +144,7 @@ Modify Personal Information
                                             @enderror
                                         </div>
                                     </div>
-
+                                
                                     <div class="col-md-2">
                                         <div class="form-group">
                                             <label>Gender:</label>
@@ -163,28 +166,11 @@ Modify Personal Information
                                         </div>
                                     </div>
 
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label>Photo:</label>
-                                            <input type="file" name="photo"
-                                                class="form-control-file @error('photo') is-invalid @enderror"
-                                                placeholder="Student Photo" value="{{ $Students->student_photo }}">
-
-                                            @error('photo')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3" style="">
+                                <div class="col-md-2" >
                                     <div class="form-group">
                                         <label>Grade Type:</label>
-                                        <select name="grade_type"
-                                            class="form-control @error('grade_type') is-invalid @enderror">
+                                        <select name="grade"
+                                            class="form-control @error('grade') is-invalid @enderror">
                                             <option value="Primary"
                                                 {{ $students->student_grade == "Primary" ? 'selected' : '' }}>
                                                 Primary</option>
@@ -193,19 +179,19 @@ Modify Personal Information
                                                 Secondary</option>
                                         </select>
 
-                                        @error('grade_type')
+                                        @error('grade')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
                                         @enderror
                                     </div>
-                                </div><br>
+                                </div>
 
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label>Year Type:</label>
-                                        <select name="year_type" 
-                                            class="form-control @error('year_type') is-invalid @enderror">
+                                        <select name="year" 
+                                            class="form-control @error('year') is-invalid @enderror">
                                             <option value="1"
                                                 {{ $students->student_year == "1" ? 'selected' : '' }}>
                                                 1</option>
@@ -226,14 +212,30 @@ Modify Personal Information
                                                 6</option>
                                         </select>
 
-                                        @error('year_type')
+                                        @error('year')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
                                         @enderror
                                     </div>
                                 </div>
-                             </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Photo:</label>
+                                        <input type="file" name="photo"
+                                            class="form-control-file @error('photo') is-invalid @enderror"
+                                            placeholder="Student Photo" value="{{ $students->student_photo }}">
+
+                                        @error('photo')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+
+                                    </div>
+                                </div>
+                            </div>
 
                                 <div class="row">
                                     <div class="col-md-6">

@@ -5,7 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Models\User;
 use App\Models\Teacher;
 use App\Models\Student;
-
+use App\Models\Timetable;
+use App\Models\Attendance;
+use App\Models\Subject;
+use App\Models\Grade;
+use App\Models\Year;
+use App\Models\Subject_Enrol;
 
 use Auth;
 use App\Http\Controllers\Controller;
@@ -101,7 +106,7 @@ class DashboardController extends Controller
         ->where('id',$id)
         ->first();
 
-        return view('/admin.admin-modify-user-profile')->with('users',$users);
+        return view('admin.admin-modify-user-profile')->with('users',$users);
     }
 
     
@@ -253,7 +258,7 @@ class DashboardController extends Controller
         ->orderBy('teacher_id','desc')
         ->get();
 
-        return view('/admin.admin-manage-teacher')->with('teachers',$teachers);
+        return view('admin.admin-manage-teacher')->with('teachers',$teachers);
     }
 
 
@@ -263,7 +268,7 @@ class DashboardController extends Controller
         ->where('teacher_id', $id)
         ->first();
 
-        return view('/admin.admin-modify-teacher-information')->with('teachers',$teachers);
+        return view('admin.admin-modify-teacher-information')->with('teachers',$teachers);
     }
 
 
@@ -283,20 +288,19 @@ class DashboardController extends Controller
         $teachers->teacher_name  = $request->input('username');
         $teachers->teacher_phone = $request->input('phone');
         $teachers->teacher_email = $request->input('email');
-        $teachers->teacher_subject = $request->input('subject');
         $teachers->teacher_gender = $request->input('gender');
+        $teachers->teacher_subject = $request->input('subject');
         $teachers->update();
 
 
         $users = User::find($id);
-
         $users->name = $request->input('username');
         $users->phone = $request->input('phone');
         $users->email = $request->input('email');
         $users->password = Hash::make($request->input('password'));
         $users->update();
         
-        return redirect('/admin.admin-manage-teacher')->with('status','Teacher data is updated');
+        return redirect('admin.admin-manage-teacher')->with('status','Teacher data is updated');
     }
 
 
@@ -310,7 +314,7 @@ class DashboardController extends Controller
         ->where('teacher_id', $id)
         ->delete();
 
-        return redirect('/admin.admin-manage-teacher')->with('status','Teacher data is Deleted');
+        return redirect('admin.admin-manage-teacher')->with('status','Teacher data is Deleted');
 
     }
 
@@ -321,7 +325,7 @@ class DashboardController extends Controller
         ->orderBy('student_id','desc')
         ->get();
 
-        return view('/admin.admin-manage-student')->with('students',$students);
+        return view('admin.admin-manage-student')->with('students',$students);
     }
 
 
@@ -331,7 +335,7 @@ class DashboardController extends Controller
         ->where('student_id',$id)
         ->first();
 
-        return view('/admin.admin-modify-student-information')->with('students',$students);
+        return view('admin.admin-modify-student-information')->with('students',$students);
     }
 
 
@@ -364,7 +368,7 @@ class DashboardController extends Controller
         $users->password = Hash::make($request->input('password'));
         $users->update();
 
-        return redirect('/admin.admin-manage-student')->with('status','Student data is edited');
+        return redirect('admin.admin-manage-student')->with('status','Student data is edited');
 
     }
 
@@ -379,7 +383,7 @@ class DashboardController extends Controller
         ->where('student_id', $id)
         ->delete();
 
-        return redirect('/admin.admin-manage-student')->with('status','Student data is deleted');
+        return redirect('admin.admin-manage-student')->with('status','Student data is deleted');
 
     }
     
@@ -398,16 +402,149 @@ class DashboardController extends Controller
         $student_count = DB::table('student_record')
         ->count();
 
+        $timetable_count = DB::table('timetable_record')
+        ->count();
+
         $data =  array();
 
         $data['total_user'] = $user_count;
 
-        //$data['total_teacher'] = $teacher_count;
+        $data['total_teacher'] = $teacher_count;
 
-        //$data['total_student'] = $student_count;
+        $data['total_student'] = $student_count;
+
+        $data['total_timetable'] = $timetable_count;
 
         return view('admin.admin-dashboard',['data'=>$data]);
-    } 
+    }
+     
+    //timetable
+    public function timetable_list(){
 
+        $timetable = DB::table('timetable_record')
+        ->orderBy('timetable_id','desc')
+        ->get();
+
+
+        return view('admin.admin-manage-user-timetable',compact('timetable'));
+    }
+
+    public function timetable_create(Request $request){
+
+        $create_timetable = new Timetable;
+        
+        /* Validate input in admin page */
+        $validatedData = $request->validate([
+            'usertype' => 'required',
+            'grade' => 'required|max:191',
+            'year' => 'required|max:191',
+            'image' => 'required|nullable|mimes:jpeg,png,jpg,gif,svg|max:191',
+        ]);
+
+        $create_timetable->usertype = $request->input('usertype');
+        $create_timetable->timetable_grade = $request->input('grade');
+        $create_timetable->timetable_year = $request->input('year');
+        if($request->hasfile('image'))
+        {
+            /* Get filename with the extension */
+            $filenameWithExt = $request->file('image')->getClientOriginalName();
+
+            /* Get just filename */
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+
+            /* Get just extension */
+            $extension = $request->file('image')->getClientOriginalExtension();
+
+            /* filename to store*/
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+
+            $path = $request->file('image')->storeAs('public/timetable_image', $fileNameToStore);
+        
+        }
+        
+        $create_timetable->save();
+
+        return redirect('/admin.admin-manage-user-timetable')->with('status','User data is updated');
+
+
+    }
+
+    public function timetable_edit(Request $request, $id){
+
+        $timetables = DB::table('timetable_record')
+        ->where('timetable_id', $id)
+        ->first();
+        
+        return view('admin.admin-modify-user-timetable')->with('timetables',$timetables);
+    }
+
+    public function timetable_update(Request $request, $id){
+
+        $timetables = Timetable::find($id);
+
+        $validatedData = $request->validate([
+            'usertype' => 'required',
+            'grade' => 'required|max:191',
+            'year' => 'required|max:191',
+            'image' => 'required|nullable|mimes:jpeg,png,jpg,gif,svg|max:191',
+        ]);
+
+        if($request->hasfile('image'))
+        {
+            /* Get filename with the extension */
+            $filenameWithExt = $request->file('image')->getClientOriginalName();
+
+            /* Get just filename */
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+
+            /* Get just extension */
+            $extension = $request->file('image')->getClientOriginalExtension();
+
+            /* filename to store*/
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+
+            $path = $request->file('image')->storeAs('public/timetable_image', $fileNameToStore);
+        }
+
+        $timetable->usertype = $request->input('usertype');
+        $timetables->timetable_grade = $request->input('grade');
+        $timetables->timetable_year = $request->input('year');
+        if($request->hasfile('image')){
+            $timetable->timetable_image = $fileNameToStore;
+        }
+        $timetables->update();
+
+        return redirect('admin-manage-user-timetable/'. $id)->with('status','Your Data is Updated');
+    }
+
+    public function timetable_delete($id)
+    {
+        $timetables = DB::table('timetable_record')
+        ->where('timetable_id', $id)
+        ->delete();
+    }
+
+    //Attendance
+    public function attendance_record_details($id)
+    {
+        $data = array();
+
+        $data['attendance_records'] = DB::table('attendance_record')
+        ->where('teacher_id', $id)
+        ->orderBy('created_at','desc')
+        ->paginate(10);
+
+        return view('admin.admin-view-attendance')->with(['attendance_records'=> $data['attendance_records']]);
+    }  
+
+    // Subject Enrol
+    public function subject_enrol_list(){
+
+        $subject_enrol = DB::table('subject_enrol_record')
+        ->orderBy('enrol_id','desc')
+        ->get();
+
+        return view('admin.admin-view-subject-enrol-list')->with('subject_enrol',$subject_enrol);
+    }
 
 }

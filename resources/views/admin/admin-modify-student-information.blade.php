@@ -43,7 +43,7 @@ Modify Student Information
 
 
                         <h4 class="card-title">Modify Student Information</h4>
-                        <form action="admin-modify-student-information-update/{{ $students->student_id }}" method="POST">
+                        <form action="/admin-modify-student-information-update/{{ $students->student_id }}" method="POST">
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
                             <div class="form-body"><br>
@@ -144,8 +144,8 @@ Modify Student Information
                                 <div class="col-md-3" style="">
                                     <div class="form-group">
                                         <label>Grade Type:</label>
-                                        <select name="grade_type"
-                                            class="form-control @error('grade_type') is-invalid @enderror">
+                                        <select name="grade"
+                                            class="form-control @error('grade') is-invalid @enderror">
                                             <option value="Primary"
                                                 {{ $students->student_grade == "Primary" ? 'selected' : '' }}>
                                                 Primary</option>
@@ -154,7 +154,7 @@ Modify Student Information
                                                 Secondary</option>
                                         </select>
 
-                                        @error('grade_type')
+                                        @error('grade')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
@@ -165,8 +165,8 @@ Modify Student Information
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label>Year Type:</label>
-                                        <select name="year_type" 
-                                            class="form-control @error('year_type') is-invalid @enderror">
+                                        <select name="year" 
+                                            class="form-control @error('year') is-invalid @enderror">
                                             <option value="1"
                                                 {{ $students->student_year == "1" ? 'selected' : '' }}>
                                                 1</option>
@@ -187,7 +187,7 @@ Modify Student Information
                                                 6</option>
                                         </select>
 
-                                        @error('year_type')
+                                        @error('year')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
@@ -232,7 +232,7 @@ Modify Student Information
                                 <div class="form-actions">
                                     <div class="text-center">
                                         <button type="submit" class="btn btn-info">Submit</button>
-                                        <a href="admin.admin-manage-student" class="btn btn-danger">Back</a>
+                                        <a href="/admin.admin-manage-student" class="btn btn-danger">Back</a>
                                     </div>
                                 </div>
                         </form>

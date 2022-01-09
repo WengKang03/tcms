@@ -7,7 +7,7 @@
 @extends('layouts.admin-dashboard')
 
 @section('title')
-Manage User
+Manage User Timetable
 @endsection
 
 @section('content')
@@ -15,13 +15,13 @@ Manage User
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-7 align-self-center">
-                <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Manage User</h4>
+                <h4 class="page-title text-truncate text-dark font-weight-medium mb-1">Manage User Timetable</h4>
                 <div class="d-flex align-items-center">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb m-0 p-0">
                             <li class="breadcrumb-item"><a href="admin.admin-dashboard" class="text-muted">Home</a>
                             </li>
-                            <li class="breadcrumb-item text-muted active" aria-current="page">User</li>
+                            <li class="breadcrumb-item text-muted active" aria-current="page">User Timetable</li>
                         </ol>
                     </nav>
                 </div>
@@ -45,7 +45,7 @@ Manage User
                         {{ method_field('DELETE') }}
 
                         <div class="modal-body">
-                            <input type="hidden" id="delete_user_record" />
+                            <input type="hidden" id="delete_timetable_record" />
                             <h4 style="text-align: center;">Are you sure to delete this user?</h4>
                         </div>
                         <div class="modal-footer">
@@ -61,7 +61,7 @@ Manage User
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Users List</h4>
+                        <h4 class="card-title">Timetable List</h4>
                         <div class="table-responsive">
 
                             <table id="dataTable" class="table table-striped table-bordered no-wrap">
@@ -78,26 +78,28 @@ Manage User
 
                                 <thead style="text-align:center;overflow-x:auto;">
                                     <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Phone</th>
-                                    <th>Email</th>
+                                    <th>Image</th>
+                                    <th>Usertype</th>
+                                    <th>Grade</th>
+                                    <th>Year</th>
                                     <th>Created At</th>
                                     <th>Updated At</th>
                                     <th>Operation</th>
                                 </thead>
 
                                 <tbody style="text-align:center;overflow-x:auto;">
-                                    @foreach($users as $user)
+                                    @foreach($timetable as $timetable)
                                         <tr>
-                                            <td>{{ $user->id }}</td>
-                                            <td>{{ $user->name }}</td>
-                                            <td>{{ $user->phone }}</td>
-                                            <td>{{ $user->email }}</td>
-                                            <td>{{ $user->created_at }}</td>
-                                            <td>{{ $user->updated_at }}</td>
+                                            <td>{{ $timetable->timetable_id }}</td>
+                                            <td><img src="/public/timetable_image/{{ $timetable->timetable_image }}" width="50px"></td>
+                                            <td>{{ $timetable->usertype }}</td>
+                                            <td>{{ $timetable->timetable_grade }}</td>
+                                            <td>{{ $timetable->timetable_year }}</td>
+                                            <td>{{ $timetable->created_at }}</td>
+                                            <td>{{ $timetable->updated_at }}</td>
                                             <td>
-                                                <a href="admin-modify-user-profile/{{ $user->id }}" class="btn waves-effect waves-light btn-light btn-circle"><i class="fas fa-edit"></i></a>
-                                                <a href="javascript:void(0)" class="btn btn-danger deleteusertbtn btn-circle"><i class="fas fa-trash-alt"></i></a>   
+                                                <a href="admin-modify-user-timetable/{{ $timetable->timetable_id }}" class="btn waves-effect waves-light btn-light btn-circle"><i class="fas fa-edit"></i></a>
+                                                <a href="javascript:void(0)" class="btn btn-danger deletetimetabletbtn btn-circle"><i class="fas fa-trash-alt"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -109,8 +111,7 @@ Manage User
             </div>
         </div>
 
-
-    </div>
+</div>
 </div>
 @endsection
 

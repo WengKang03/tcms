@@ -97,7 +97,7 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li class="sidebar-item"> 
-                            <a class="sidebar-link sidebar-link" href="#" aria-expanded="false">
+                            <a class="sidebar-link sidebar-link" href="/teacher.teacher-dashboard" aria-expanded="false">
                                 <i data-feather="home" class="feather-icon"></i>
                                 <span class="hide-menu">Dashboard</span></a></li>
 
@@ -106,10 +106,10 @@
                         <li class="nav-small-cap"><span class="hide-menu">Manage Information</span></li>
 
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link"
-                                href="teacher-modify-personal-information/{{ Auth::id() }}" aria-expanded="false"><i data-feather="list"
+                                href="/teacher-view-personal-information/{{ Auth::id() }}" aria-expanded="false"><i data-feather="list"
                                     class="feather-icon"></i><span class="hide-menu">View</span></a></li>
                         
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="#"
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="teacher-modify-personal-information/{{ Auth::id() }}"
                                 aria-expanded="false"><i data-feather="list" class="feather-icon"></i><span
                                     class="hide-menu">Manage</span></a></li>
 
@@ -117,11 +117,11 @@
 
                         <li class="nav-small-cap"><span class="hide-menu">Manage Teaching Material</span></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="#"
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{{url('teacher.teacher-create-material-information')}}"
                                 aria-expanded="false"><i data-feather="list" class="feather-icon"></i><span
-                                    class="hide-menu">View</span></a></li>
+                                    class="hide-menu">Create</span></a></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="#"
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{{url('teacher.teacher-manage-material-information')}}"
                                 aria-expanded="false"><i data-feather="list" class="feather-icon"></i><span
                                     class="hide-menu">Manage</span></a></li>
 
@@ -129,19 +129,19 @@
 
                         <li class="nav-small-cap"><span class="hide-menu">Manage Attendance</span></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="#"
-                                aria-expanded="false"><i data-feather="list" class="feather-icon"></i><span
-                                    class="hide-menu">View</span></a></li>
-
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="#"
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{{url('teacher.teacher-create-attendance')}}"
                                 aria-expanded="false"><i data-feather="list" class="feather-icon"></i><span
                                     class="hide-menu">Create</span></a></li>
 
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{{url('teacher.teacher-manage-attendance')}}"
+                                aria-expanded="false"><i data-feather="list" class="feather-icon"></i><span
+                                    class="hide-menu">Manage</span></a></li>
+
                         <li class="list-divider"></li>
 
-                        <li class="nav-small-cap"><span class="hide-menu">Manage Timetable</span></li>
+                        <li class="nav-small-cap"><span class="hide-menu">View Timetable</span></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="#"
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{{url('teacher.teacher-view-timetable')}}"
                                 aria-expanded="false"><i data-feather="list" class="feather-icon"></i><span
                                     class="hide-menu">View</span></a></li>
 

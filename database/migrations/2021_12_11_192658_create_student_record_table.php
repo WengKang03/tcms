@@ -21,7 +21,7 @@ class CreateStudentRecordTable extends Migration
             $table->string('student_grade')->nullable();
             $table->string('student_year')->nullable();
             $table->string('student_gender')->nullable();
-            $$table->string('student_photo')->nullable();
+            $table->string('student_photo')->nullable();
             $table->timestamps();
         });
     }
