@@ -41,7 +41,7 @@ Modify Users Timetable
 
 
                         <h4 class="card-title">Modify Timetable Information</h4>
-                        <form action="/admin-modify-teacher-information-update/{{ $timetables->timetable_id }}" method="POST">
+                        <form action="/admin-modify-user-timetable-update/{{ $timetables->timetable_id }}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
                             <div class="form-body"><br>
@@ -60,7 +60,7 @@ Modify Users Timetable
                                             <label>Image :</label>
                                             <input type="file" name="image"
                                                 class="form-control-file @error('image') is-invalid @enderror"
-                                                placeholder="Timetable Image" value="{{ $timetables->timetable_image }}">
+                                                placeholder="Timetable Image" value="{{ $timetables->timetable_image}}">
 
                                             @error('image')
                                                 <div class="invalid-feedback">
@@ -74,7 +74,7 @@ Modify Users Timetable
                                     <div class="col-md-3">
                                         <div class="form-group">
                                             <label>Grade :</label>
-                                            <select name="gender"
+                                            <select name="grade"
                                                 class="form-control  @error('grade') is-invalid @enderror">
                                                 <option value="None"
                                                     {{ $timetables->timetable_grade == "none" ? 'selected' : '' }}>
@@ -87,7 +87,7 @@ Modify Users Timetable
                                                     Secondary</option>
                                             </select>
 
-                                            @error('Grade')
+                                            @error('grade')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
                                                 </div>
@@ -133,12 +133,30 @@ Modify Users Timetable
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="form-group">
                                             <label>User Type:</label>
-                                            <input type="text" name="usertype"
-                                                class="form-control @error('usertype') is-invalid @enderror"
-                                                placeholder="Created At" value="{{ $timetables->usertype }}" readonly>
+                                            <select name="usertype" 
+                                            class="form-control @error('usertype') is-invalid @enderror">
+                                            <option value="Student"
+                                                {{ $timetables->usertype == "student" ? 'selected' : '' }}>
+                                                Student</option>
+                                            <option value="BM Teacher"
+                                                {{ $timetables->timetable_year == "bm teacher" ? 'selected' : '' }}>
+                                                BM Teacher</option>
+                                            <option value="BI Teacher"
+                                                {{ $timetables->timetable_year == "bi teacher" ? 'selected' : '' }}>
+                                                BI Teacher</option>
+                                            <option value="BC Teacher"
+                                                {{ $timetables->timetable_year == "bc teacher" ? 'selected' : '' }}>
+                                                BC Teacher</option>
+                                            <option value="Math Teacher"
+                                                {{ $timetables->timetable_year == "math teacher" ? 'selected' : '' }}>
+                                                Math Teacher</option>
+                                            <option value="SC Teacher"
+                                                {{ $timetables->timetable_year == "sc teacher" ? 'selected' : '' }}>
+                                                SC Teacher</option>
+                                        </select>
 
                                             @error('usertype')
                                                 <div class="invalid-feedback">

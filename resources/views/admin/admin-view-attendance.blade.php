@@ -27,27 +27,6 @@ View Attendance
         <div class="row">
             <div class="col-lg-12">
 
-                @if(session('status'))
-                <div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show"
-                    role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                    <strong>{{ session('status') }}</strong>
-                </div>
-                @endif
-
-                @if(session('wrong_status'))
-                <div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show"
-                    role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                    <strong>{{ session('wrong_status') }}</strong>
-                </div>
-                @endif
-                
-
                 <input id="accordion_search_bar" class="form-control custom-shadow custom-radius border-0 bg-white"
                     type="search" placeholder="Typing in the date of the record that you want to search."
                     aria-label="Search"><br />
@@ -94,6 +73,7 @@ View Attendance
                                                     <td>
                                                         <a href="admin-modify-attendance/{{ $attendance_record->attendance_id }}"
                                                             class="btn waves-effect waves-light btn-light">Edit</a>
+                                                        
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -104,9 +84,6 @@ View Attendance
                             </div>
                         </div>
 
-
-
-
                     @endforeach
 
 
@@ -114,7 +91,6 @@ View Attendance
             </div>
         </div>
 
-        <ul class="pagination justify-content-center">{{ $data['attendance_record']->links() }}</ul>
     </div>
     </div>
     

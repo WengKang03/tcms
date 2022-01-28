@@ -13,7 +13,7 @@ Modify Study Material
                 <div class="d-flex align-items-center">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb m-0 p-0">
-                            <li class="breadcrumb-item"><a href="/teacher.teacher-dashboard"
+                            <li class="breadcrumb-item"><a href="teacher.teacher-dashboard"
                                     class="text-muted">Dashboard</a></li>
                             <li class="breadcrumb-item text-muted active" aria-current="page">Study Material</li>
                         </ol>
@@ -41,7 +41,7 @@ Modify Study Material
                         @endif
 
                         <h4 class="card-title">Modify Material</h4>
-                        <form action="/teacher-modify-matarial-information-update/{{ $materials->material_id }}" method="POST">
+                        <form action="/teacher-modify-material-information-update/{{ $materials->material_id }}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
                             <div class="form-body"><br>
@@ -80,7 +80,7 @@ Modify Study Material
                                                 {{ $materials->material_grade == "primary" ? 'selected' : '' }}>
                                                 Primary</option>
                                             <option value="secondary"
-                                                {{ $materials->material_grade == "Secondary" ? 'selected' : '' }}>
+                                                {{ $materials->material_grade == "secondary" ? 'selected' : '' }}>
                                                 Secondary</option>
                                         </select>
 
@@ -159,11 +159,11 @@ Modify Study Material
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Description :</label>
-                                                <textarea ame="description"
-                                                class="form-control-file @error('description') is-invalid @enderror"
+                                                <textarea name="desc"
+                                                class="form-control-file @error('desc') is-invalid @enderror"
                                                 placeholder="Material description" value="{{  $materials->material_desc }}" ></textarea>
         
-                                                @error('description')
+                                                @error('desc')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
                                                     </div>
@@ -174,7 +174,7 @@ Modify Study Material
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label>Created By</label>
-                                                <textarea ame="created_by"
+                                                <textarea name="created_by"
                                                 class="form-control-file @error('created_by') is-invalid @enderror"
                                                 placeholder="Material Created By" value="{{  $materials->created_by }}" ></textarea>
         

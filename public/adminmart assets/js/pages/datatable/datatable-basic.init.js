@@ -11,11 +11,8 @@
 
 $('#dataTable').DataTable();
 
-/****************************************
- *       Doctor delete patient         *
- ****************************************/
 
-$('#dataTable').on('click', '.deletepatientbtn', function () {
+$('#dataTable').on('click', '.deletetimetabletbtn', function () {
 
     $tr = $(this).closest('tr');
 
@@ -23,48 +20,9 @@ $('#dataTable').on('click', '.deletepatientbtn', function () {
         return $(this).text();
     }).get();
 
-    $('#delete_user_record').val(data[0]);
+    $('#delete_timetable_record').val(data[0]);
 
-    $('#delete_model_form').attr('action', '/patient-delete/' + data[0]);
-
-    $('#deletemodelpop').modal('show');
-});
-
-
-
-
-
-
-$('#dataTable').on('click', '.deletepatientbtn', function () {
-
-    $tr = $(this).closest('tr');
-
-    var data = $tr.children("td").map(function () {
-        return $(this).text();
-    }).get();
-
-    $('#delete_user_record').val(data[0]);
-
-    $('#delete_model_form').attr('action', '/admin-patient-delete/' + data[0]);
-
-    $('#deletemodelpop').modal('show');
-});
-
-
-
-
-
-$('#dataTable').on('click', '.deletedoctortbtn', function () {
-
-    $tr = $(this).closest('tr');
-
-    var data = $tr.children("td").map(function () {
-        return $(this).text();
-    }).get();
-
-    $('#delete_user_record').val(data[0]);
-
-    $('#delete_model_form').attr('action', '/admin-doctor-delete/' + data[0]);
+    $('#delete_model_form').attr('action', '/admin-timetable-delete/' + data[0]);
 
     $('#deletemodelpop').modal('show');
 });
@@ -86,7 +44,7 @@ $('#dataTable').on('click', '.deleteusertbtn', function () {
 });
 
 
-$('#dataTable').on('click', '.acceptbtn', function () {
+$('#dataTable').on('click', '.deletematerialtbtn', function () {
 
     $tr = $(this).closest('tr');
 
@@ -94,27 +52,18 @@ $('#dataTable').on('click', '.acceptbtn', function () {
         return $(this).text();
     }).get();
 
-    $('#accept_supplier_record').val(data[0]);
+    $('#delete_material_record').val(data[0]);
 
-    $('#accept_model_form').attr('action', '/admin-manage-supplier-status-accept/' + data[0]);
+    $('#delete_model_form').attr('action', '/material-delete/' + data[0]);
 
-    $('#acceptmodelpop').modal('show');
+    $('#deletemodelpop').modal('show');
 });
 
-$('#dataTable').on('click', '.declinebtn', function () {
 
-    $tr = $(this).closest('tr');
 
-    var data = $tr.children("td").map(function () {
-        return $(this).text();
-    }).get();
 
-    $('#decline_supplier_record').val(data[0]);
 
-    $('#decline_model_form').attr('action', '/admin-manage-supplier-status-decline/' + data[0]);
 
-    $('#declinemodelpop').modal('show');
-});
 /****************************************
  *       Default Order Table           *
  ****************************************/

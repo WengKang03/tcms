@@ -41,7 +41,7 @@ Modify Personal Information
                         @endif
 
 
-                        <form action="student-modify-personal-information-update/{{ Auth::id() }}" method="POST" enctype="multipart/form-data">
+                        <form action="/student-modify-personal-information-update/{{ Auth::id() }}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
                             <div class="form-body">

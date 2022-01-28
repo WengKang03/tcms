@@ -11,6 +11,7 @@ use App\Models\Subject;
 use App\Models\Grade;
 use App\Models\Year;
 use App\Models\Subject_Enrol;
+use App\Models\Material;
 
 use Auth;
 use App\Http\Controllers\Controller;
@@ -461,6 +462,7 @@ class DashboardController extends Controller
             $path = $request->file('image')->storeAs('public/timetable_image', $fileNameToStore);
         
         }
+        $create_timetable->timetable_image = $fileNameToStore;
         
         $create_timetable->save();
 
@@ -506,15 +508,15 @@ class DashboardController extends Controller
             $path = $request->file('image')->storeAs('public/timetable_image', $fileNameToStore);
         }
 
-        $timetable->usertype = $request->input('usertype');
+        $timetables->usertype = $request->input('usertype');
         $timetables->timetable_grade = $request->input('grade');
         $timetables->timetable_year = $request->input('year');
         if($request->hasfile('image')){
-            $timetable->timetable_image = $fileNameToStore;
+            $timetables->timetable_image = $fileNameToStore;
         }
         $timetables->update();
 
-        return redirect('admin-manage-user-timetable/'. $id)->with('status','Your Data is Updated');
+        return redirect('admin-modify-user-timetable/'. $id)->with('status','Your Data is Updated');
     }
 
     public function timetable_delete($id)
@@ -522,19 +524,35 @@ class DashboardController extends Controller
         $timetables = DB::table('timetable_record')
         ->where('timetable_id', $id)
         ->delete();
+
+        return redirect('admin.admin-manage-user-timetable')->with('status','Timetable data is Deleted');
     }
 
     //Attendance
+
+    public function teachers_list()
+    {
+        $teachers = DB::table('teacher_record')
+        ->orderBy('teacher_id','desc')
+        ->get();
+
+        return view('admin.admin-manage-attendance')->with('teachers',$teachers);
+    }
+
     public function attendance_record_details($id)
     {
         $data = array();
+
+        $data['teacher_name'] = DB::table('teacher_record')
+        ->where('teacher_id', $id)
+        ->get();
 
         $data['attendance_records'] = DB::table('attendance_record')
         ->where('teacher_id', $id)
         ->orderBy('created_at','desc')
         ->paginate(10);
 
-        return view('admin.admin-view-attendance')->with(['attendance_records'=> $data['attendance_records']]);
+        return view('admin.admin-view-attendance',['data'=>$data]);
     }  
 
     // Subject Enrol
@@ -545,6 +563,35 @@ class DashboardController extends Controller
         ->get();
 
         return view('admin.admin-view-subject-enrol-list')->with('subject_enrol',$subject_enrol);
+    }
+
+    public function subject_enrol_edit(Request $request, $id){
+
+        $subject_enrols = DB::table('subject_enrol_record')
+        ->where('enrol_id', $id)
+        ->first();
+        
+        return view('admin.admin-modify-subject-enrol')->with('subject_enrols',$subject_enrols);
+    }
+
+    public function subject_enrol_update(Request $request, $id){
+
+        $subject_enrols = Subject_Enrol::find($id);
+
+        $validatedData = $request->validate([
+            'name' => 'required|max:191',
+            'grade' => 'required|max:191',
+            'year' => 'required|max:191',
+            'subject' => 'required|max:191',
+        ]);
+
+            $subject_enrols->student_name = $request->input('name');
+            $subject_enrols->enrol_grade = $request->input('grade');
+            $subject_enrols->enrol_year = $request->input('year');
+            $subject_enrols->enrol_type = $request->input('subject');
+            $subject_enrols->update();;
+
+            return redirect('/admin.admin-view-subject-enrol-list')->with('status','Your Data is Updated');
     }
 
 }

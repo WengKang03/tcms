@@ -76,7 +76,7 @@ Route::get('/admin.admin-view-subject-enrol-list', function () {
     
     Route::put('/admin-modify-student-information-update/{id}','Admin\DashboardController@student_update');
     
-    Route::delete('/admin-student-delete/{id}','Admin\DashboardController@student_delete')->name('admin-student-delete/{id}');
+    Route::delete('/admin-student-delete/{id}','Admin\DashboardController@student_delete');
 
 
     Route::post('/timetable-create', 'Admin\DashboardController@timetable_create');
@@ -87,12 +87,19 @@ Route::get('/admin.admin-view-subject-enrol-list', function () {
     
     Route::put('/admin-modify-user-timetable-update/{id}','Admin\DashboardController@timetable_update');
 
-    Route::delete('/admin-user-timetable-delete/{id}','Admin\DashboardController@timetable_delete');
+    Route::delete('/admin-timetable-delete/{id}','Admin\DashboardController@timetable_delete');
+
+    //Attendance
+    Route::get('/admin.admin-manage-attendance', 'Admin\DashboardController@teachers_list');
 
     Route::get('/admin.admin-view-attendance/{id}', 'Admin\DashboardController@attendance_record_details');
 
     //subjecy Enrol
     Route::get('/admin.admin-view-subject-enrol-list', 'Admin\DashboardController@subject_enrol_list');
+
+    Route::get('/admin-modify-subject-enrol/{id}', 'Admin\DashboardController@subject_enrol_edit');
+    
+    Route::put('/admin-modify-subject-enrol-update/{id}','Admin\DashboardController@subject_enrol_update');
 });
 
 
@@ -115,6 +122,7 @@ Route::get('/teacher.teacher-create-attendance', function () {
     return view('teacher.teacher-create-attendance');
 });
 
+Route::get('/teacher.teacher-dashboard', 'Teacher\DashboardController@teacher_data');
 
 Route::get('/teacher-view-personal-information/{id}', 'Teacher\DashboardController@teacher_view');
 
@@ -144,6 +152,7 @@ Route::post('/create-attendance','Teacher\DashboardController@create_attendance'
     Route::get('/teacher-modify-attendance/{id}', 'Teacher\DashboardController@attendance_edit');
     
     Route::put('/teacher-modify-attendance-update/{id}','Teacher\DashboardController@attendance_update');
+
 });
 
 
@@ -160,6 +169,10 @@ Route::group(['middleware' => ['auth','student']], function () {
         return view('student.student-create-subject-enrol');
     });
 
+    Route::get('/student.student-view-teaching-material', function () {
+        return view('student.student-view-teaching-material');
+    });
+
 Route::get('/student-view-personal-information/{id}', 'Student\DashboardController@student_view');
 
 Route::get('/student-modify-personal-information/{id}', 'Student\DashboardController@student_edit');
@@ -171,5 +184,7 @@ Route::get('/student.student-view-timetable', 'Student\DashboardController@timet
 Route::post('/create-subject-enrol','Student\DashboardController@subject_enrol_create');
 
 Route::get('/student.student-view-subject-enrol-list', 'Student\DashboardController@subject_enrol_list');
+
+Route::get('/student.student-view-teaching-material', 'Student\DashboardController@material_list');
 });
 

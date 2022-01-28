@@ -1,5 +1,5 @@
 <link
-    href="{{ asset('adminmart assets/extra-libs/datatables.net-bs4/css/dataTables.bootstrap4.css') }}"
+    href="{{ asset('adminmart assets/extra-libs/datatables.net-bs4/css/dataTables.bootstrap5.css') }}"
     rel="stylesheet">
 <!-- Custom CSS -->
 <link href="{{ asset('adminmart assets/css/style.min.css') }}" rel="stylesheet">
@@ -46,7 +46,7 @@ Manage User Timetable
 
                         <div class="modal-body">
                             <input type="hidden" id="delete_timetable_record" />
-                            <h4 style="text-align: center;">Are you sure to delete this user?</h4>
+                            <h4 style="text-align: center;">Are you sure to delete this timetable?</h4>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
@@ -78,7 +78,7 @@ Manage User Timetable
 
                                 <thead style="text-align:center;overflow-x:auto;">
                                     <th>ID</th>
-                                    <th>Image</th>
+                                    <th>File</th>
                                     <th>Usertype</th>
                                     <th>Grade</th>
                                     <th>Year</th>
@@ -91,7 +91,7 @@ Manage User Timetable
                                     @foreach($timetable as $timetable)
                                         <tr>
                                             <td>{{ $timetable->timetable_id }}</td>
-                                            <td><img src="/public/timetable_image/{{ $timetable->timetable_image }}" width="50px"></td>
+                                            <td><a href="/storage/timetable_image/{{ $timetable->timetable_image }}" class="btn waves-effect waves-light btn-light btn-circle"><i class="fas fa-file"></i></a></td>
                                             <td>{{ $timetable->usertype }}</td>
                                             <td>{{ $timetable->timetable_grade }}</td>
                                             <td>{{ $timetable->timetable_year }}</td>
@@ -118,3 +118,33 @@ Manage User Timetable
 @section('scripts')
 
 @endsection
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#myList div").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+
+
+$('#dataTable').on('click', '.deletetimetabletbtn', function () {
+
+$tr = $(this).closest('tr');
+
+var data = $tr.children("td").map(function () {
+    return $(this).text();
+}).get();
+
+$('#delete_timetable_record').val(data[0]);
+
+$('#delete_model_form').attr('action', '/admin-timetable-delete/' + data[0]);
+
+$('#deletemodelpop').modal('show');
+});
+
+});
+</script>

@@ -44,22 +44,24 @@ View timetable
 
                             <thead style="text-align:center;overflow-x:auto;">
                                 <th>ID</th>
-                                <th>Image</th>
-                                <th>Grade</th>
-                                <th>Year</th>
-                                <th>Created At</th>
-                                <th>Updated At</th>
+                                    <th>Image</th>
+                                    <th>Usertype</th>
+                                    <th>Grade</th>
+                                    <th>Year</th>
+                                    <th>Created At</th>
+                                    <th>Updated At</th>
                             </thead>
 
                             <tbody style="text-align:center;overflow-x:auto;">
                                 @foreach($timetable as $timetable)
                                     <tr>
                                         <td>{{ $timetable->timetable_id }}</td>
-                                        <td><img src="{{ asset('storage/'. $timetable->timetable_image ) }}" width="50px"></td>
-                                        <td>{{ $timetable->timetable_grade }}</td>
-                                        <td>{{ $timetable->timetable_year }}</td>
-                                        <td>{{ $timetable->created_at }}</td>
-                                        <td>{{ $timetable->updated_at }}</td>
+                                            <td><img src="/storage/timetable_image/{{ $timetable->timetable_image }}" width="50px"></td>
+                                            <td>{{ $timetable->usertype }}</td>
+                                            <td>{{ $timetable->timetable_grade }}</td>
+                                            <td>{{ $timetable->timetable_year }}</td>
+                                            <td>{{ $timetable->created_at }}</td>
+                                            <td>{{ $timetable->updated_at }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

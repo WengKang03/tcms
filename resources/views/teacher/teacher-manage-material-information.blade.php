@@ -46,7 +46,7 @@ Manage material
 
                         <div class="modal-body">
                             <input type="hidden" id="delete_material_record" />
-                            <h4 style="text-align: center;">Are you sure to delete this user?</h4>
+                            <h4 style="text-align: center;">Are you sure to delete this teaching material?</h4>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
@@ -86,13 +86,15 @@ Manage material
                                 <th>Created By</th>
                                 <th>Created At</th>
                                 <th>Updated At</th>
+                                <th>Operation</th>
                             </thead>
 
                             <tbody style="text-align:center;overflow-x:auto;">
                                 @foreach($materials as $material)
                                     <tr>
                                         <td>{{ $material->material_id }}</td>
-                                        <td><img src="{{ asset('public/material_file/'. $material->material_file ) }}" width="50px"></td>
+                                        <td><a href="/storage/material_file/{{ $material->material_file}}"
+                                            class="btn waves-effect waves-light btn-light btn-circle"><i class="fas fa-file"></i></a></td>
                                         <td>{{ $material->material_grade }}</td>
                                         <td>{{ $material->material_year }}</td>
                                         <td>{{ $material->material_subject }}</td>
@@ -103,7 +105,7 @@ Manage material
                                         <td>
                                             <a href="teacher-modify-material-information/{{ $material->material_id }}"
                                                 class="btn waves-effect waves-light btn-light btn-circle"><i class="fas fa-edit"></i></a>
-                                            <a href="javascript:void(0)" class="btn btn-danger delete teacher btn-circle"><i class="fas fa-trash-alt"></i></a>
+                                            <a href="javascript:void(0)" class="btn btn-danger deletematerialtbtn btn-circle"><i class="fas fa-trash-alt"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -124,7 +126,35 @@ Manage material
 
 @endsection
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+<script>
+    $(document).ready(function () {
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#myList div").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+
+
+$('#dataTable').on('click', '.deletematerialtbtn', function () {
+
+$tr = $(this).closest('tr');
+
+var data = $tr.children("td").map(function () {
+    return $(this).text();
+}).get();
+
+$('#delete_material_record').val(data[0]);
+
+$('#delete_model_form').attr('action', '/material-delete/' + data[0]);
+
+$('#deletemodelpop').modal('show');
+});
+    });
+
+</script>
    
 
         

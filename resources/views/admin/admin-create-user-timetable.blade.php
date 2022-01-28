@@ -96,11 +96,16 @@ Craete Users Timetable
                              <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Users Type:</label>
-                                        <textarea 
-                                        class="form-control @error('usertype') is-invalid @enderror"
-                                        placeholder="Please write down the User."
-                                        name="usertype">{{ old('usertype') }}</textarea>
-                                        </select>
+                                    <select name="usertype" 
+                                    class="form-control @error('usertype') is-invalid @enderror"
+                                    placeholder="User Type" value="{{ old('usertype') }}">
+                                        <option value="student">Student</option>
+                                        <option value="BM Teacher">BM Teacher</option>
+                                        <option value="BI Teacher">BI Teacher</option>
+                                        <option value="BC Teacher">BC Teacher</option>
+                                        <option value="Math Teacher">Math Teacher</option>
+                                        <option value="SC Teacher">SC Teacher</option>
+                                </select>
 
                                     @error('usertype')
                                         <div class="invalid-feedback">

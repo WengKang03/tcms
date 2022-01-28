@@ -103,7 +103,7 @@
 
                         <li class="list-divider"></li>
 
-                        <li class="nav-small-cap"><span class="hide-menu">Manage Timetable</span></li>
+                        <li class="nav-small-cap"><span class="hide-menu">Timetable</span></li>
 
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link"
                                 href="{{url('admin.admin-create-user-timetable')}}" aria-expanded="false"><i data-feather="list"
@@ -117,16 +117,16 @@
 
 
 
-                        <li class="nav-small-cap"><span class="hide-menu">Manage Attendance</span></li>
+                        <li class="nav-small-cap"><span class="hide-menu">Attendance</span></li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{{url('admin.admin-view-attendance')}}"
+                        <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{{url('admin.admin-manage-attendance')}}"
                                 aria-expanded="false"><i data-feather="list" class="feather-icon"></i><span
                                     class="hide-menu">View</span></a></li>
 
 
                         <li class="list-divider"></li>
 
-                        <li class="nav-small-cap"><span class="hide-menu">Manage Users</span></li>
+                        <li class="nav-small-cap"><span class="hide-menu">All Users</span></li>
 
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{{url('admin.admin-create-user')}}"
                                 aria-expanded="false"><i data-feather="list" class="feather-icon"></i><span
@@ -140,7 +140,7 @@
 
                         <li class="list-divider"></li>
 
-                        <li class="nav-small-cap"><span class="hide-menu">View Users</span></li>
+                        <li class="nav-small-cap"><span class="hide-menu">Users</span></li>
 
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{{url('admin.admin-manage-teacher')}}"
                                 aria-expanded="false"><i data-feather="list" class="feather-icon"></i><span
@@ -153,7 +153,7 @@
 
                         <li class="list-divider"></li>
 
-                        <li class="nav-small-cap"><span class="hide-menu">View Subject Enrol</span></li>
+                        <li class="nav-small-cap"><span class="hide-menu">Subject Enrol</span></li>
 
                         <li class="sidebar-item"> <a class="sidebar-link sidebar-link" href="{{url('admin.admin-view-subject-enrol-list')}}"
                                 aria-expanded="false"><i data-feather="list" class="feather-icon"></i><span

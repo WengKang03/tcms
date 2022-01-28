@@ -30,6 +30,42 @@ Dashboard
         </div>
     </div>
 
+    <div class="container-fluid">
+
+        <div class="card-group">
+
+            <div class="card border-righ">
+                <div class="card-body">
+                    <div class="d-flex d-lg-flex d-md-block align-items-center">
+                        <div>
+                            <h2 class="text-dark mb-1 font-weight-medium">{{ $data['total_timetable'] }}</h2>
+                            <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Total Timetable</h6>
+                        </div>
+                        <div class="ml-auto mt-md-3 mt-lg-0">
+                            <span class="opacity-7 text-muted"><i data-feather="calendar"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card border-righ">
+                <div class="card-body">
+                    <div class="d-flex d-lg-flex d-md-block align-items-center">
+                        <div>
+                            <h2 class="text-dark mb-1 font-weight-medium">{{ $data['total_material'] }}</h2>
+                            <h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">Total Material</h6>
+                        </div>
+                        <div class="ml-auto mt-md-3 mt-lg-0">
+                            <span class="opacity-7 text-muted"><i data-feather="file"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
 </div>
 @endsection
 

@@ -1,5 +1,5 @@
 <link
-    href="{{ asset('adminmart assets/extra-libs/datatables.net-bs4/css/dataTables.bootstrap4.css') }}"
+    href="{{ asset('adminmart assets/extra-libs/datatables.net-bs4/css/dataTables.bootstrap5.css') }}"
     rel="stylesheet">
 <!-- Custom CSS -->
 <link href="{{ asset('adminmart assets/css/style.min.css') }}" rel="stylesheet">

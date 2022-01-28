@@ -129,7 +129,7 @@ class DashboardController extends Controller
             'subject' => 'required|max:191',
             'desc' => 'required|max:191',
             'created_by' => 'required|max:191',
-            'file' => 'required|nullable|mimes:csv,txt,xlx,xls,pdf|max:191',
+            'file' => 'required|nullable|mimes:csv,txt,xlx,xls,pdf,docx|max:191',
         ]);
 
         $create_material->material_grade = $request->input('grade');
@@ -154,6 +154,7 @@ class DashboardController extends Controller
             $path = $request->file('file')->storeAs('public/material_file', $fileNameToStore);
         
         }
+        $create_material->material_file = $fileNameToStore;
         
         $create_material->save();
 
@@ -181,7 +182,7 @@ class DashboardController extends Controller
             'subject' => 'required|max:191',
             'desc' => 'required|max:191',
             'created_by' => 'required|max:191',
-            'file' => 'required|nullable|mimes:csv,txt,xlx,xls,pdf|max:191',
+            'file' => 'required|nullable|mimes:csv,txt,xlx,xls,pdf,docx|max:191',
         ]);
 
 
@@ -208,11 +209,11 @@ class DashboardController extends Controller
         $materials->material_desc = $request->input('desc');
         $materials->created_by = $request->input('created_by');
         if($request->hasfile('file')){
-            $materiala->material_file = $fileNameToStore;
+            $materials->material_file = $fileNameToStore;
         }
         $materials->update();
 
-        return redirect('teacher-manage-material-information/'. $id)->with('status','Material Data is Updated');
+        return redirect('teacher-modify-material-information/'. $id)->with('status','Material Data is Updated');
     }
 
     public function material_delete($id)
@@ -220,19 +221,22 @@ class DashboardController extends Controller
         $materials = DB::table('material_record')
         ->where('material_id', $id)
         ->delete();
+
+        return redirect('teacher.teacher-manage-material-information')->with('status','Teaching Material data is Deleted');
     }
+
 
 
     //Attendance
     public function attendance_record()
     {
-        $teacher = Auth::user();
-        $teacher_id = $teacher->id;
+        $user = Auth::user();
+        $userid = $user->id;
 
         $data =  array();
 
         $data['teachers'] = DB::table('attendance_record')
-        ->where('teacher_id', $teacher_id)
+        ->where('teacher_id', $userid)
         ->orderBy('created_at','desc')
         ->paginate(10);
 
@@ -299,8 +303,28 @@ class DashboardController extends Controller
         $attendance_record->reason = $request->input('reason');
         $attendance_record->update();
 
-        return redirect('patient-modify-attendance/'. $id)->with('status','Your health index record is Edited');
+        return redirect('teacher-modify-attendance/'. $id)->with('status','Your attendance record is Edited');
 
+    }
+
+    public function teacher_data(){
+
+        $teacher = Auth::user();
+        $teacher_id = $teacher->id;
+
+        $timetable_count = DB::table('timetable_record')
+        ->count();
+
+        $material_count = DB::table('material_record')
+        ->count();
+
+        $data =  array();
+
+        $data['total_timetable'] = $timetable_count;
+
+        $data['total_material'] = $material_count;
+
+        return view('teacher.teacher-dashboard',['data'=>$data]);
     }
 
 

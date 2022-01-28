@@ -50,6 +50,7 @@ View Subject Enrol List
                                 <th>Subject</th>
                                 <th>Created At</th>
                                 <th>Updated At</th>
+                                <th>Operation</th>
                             </thead>
 
                             <tbody style="text-align:center;overflow-x:auto;">
@@ -62,6 +63,10 @@ View Subject Enrol List
                                         <td>{{ $subject_enrol->enrol_type }}</td>
                                         <td>{{ $subject_enrol->created_at }}</td>
                                         <td>{{ $subject_enrol->updated_at }}</td>
+                                        <td>
+                                            <a href="admin-modify-subject-enrol/{{ $subject_enrol->enrol_id }}"
+                                                class="btn waves-effect waves-light btn-light">Edit</a>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

@@ -133,4 +133,15 @@ class DashboardController extends Controller
             return redirect('student.student-view-subject-enrol-list')->with('status','Your record is Added');
 
     }
+
+    // Material
+    public function material_list(){
+
+        $materials = DB::table('material_record')
+        ->orderBy('material_id','desc')
+        ->get();
+
+        return view('student.student-view-teaching-material')->with('materials',$materials);
+    }
+
 }
